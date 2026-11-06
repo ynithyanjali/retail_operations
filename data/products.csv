@@ -1,0 +1,29 @@
+product_id,product_name,category,unit_cost_usd,list_price_usd
+P001,Wireless Keyboard,Electronics,19.00,49.00
+P002,Bluetooth Speaker,Electronics,27.00,75.00
+P003,USB-C Dock,Electronics,33.00,89.00
+P004,Webcam,Electronics,30.00,84.00
+P005,Wireless Mouse,Electronics,12.00,35.00
+P006,Laptop Stand,Electronics,17.00,48.00
+P007,Portable Charger,Electronics,21.00,59.00
+P008,Desk Lamp,Home & Living,14.00,42.00
+P009,Throw Blanket,Home & Living,18.00,52.00
+P010,Storage Basket,Home & Living,11.00,34.00
+P011,Ceramic Vase,Home & Living,13.00,39.00
+P012,Floor Cushion,Home & Living,22.00,64.00
+P013,Water Bottle Set,Home & Living,9.00,29.00
+P014,Wall Organizer,Home & Living,15.00,47.00
+P015,Cotton T-Shirt,Apparel,8.00,27.00
+P016,Everyday Hoodie,Apparel,21.00,62.00
+P017,Running Shorts,Apparel,12.00,38.00
+P018,Canvas Tote,Apparel,6.00,22.00
+P019,Beanie Hat,Apparel,5.00,20.00
+P020,Fleece Jacket,Apparel,28.00,85.00
+P021,Travel Backpack,Apparel,25.00,79.00
+P022,Notebook Set,Office Supplies,5.00,19.00
+P023,Gel Pen Pack,Office Supplies,4.00,15.00
+P024,Desk Organizer,Office Supplies,11.00,36.00
+P025,Planner,Office Supplies,7.00,25.00
+P026,File Folder Set,Office Supplies,6.00,21.00
+P027,Desk Mat,Office Supplies,12.00,37.00
+P028,Sticky Note Set,Office Supplies,3.00,13.00
