@@ -104,6 +104,54 @@
       color: #64748b;
       padding: 25px;
     }
+    
+/* Monthly sales chart */
+
+.chart-scroll {
+  overflow-x: auto;
+  margin-top: 25px;
+}
+
+.monthly-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  height: 250px;
+  min-width: 750px;
+  border-bottom: 2px solid #dbe3ed;
+}
+
+.month-column {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.month-value {
+  font-size: 12px;
+  margin-bottom: 8px;
+  color: #475569;
+}
+
+.month-bar {
+  width: 75%;
+  background: #2775b6;
+  border-radius: 6px 6px 0 0;
+}
+
+.month-bar:hover {
+  background: #174b80;
+}
+
+.month-label {
+  font-size: 12px;
+  margin-top: 8px;
+  color: #475569;
+}
+
   </style>
 </head>
 
@@ -146,6 +194,23 @@
       </div>
 
     </section>
+
+<section class="panel">
+  <h2>Monthly Net Sales</h2>
+
+  <p class="subtitle">
+    Revenue trends from January to December 2025.
+  </p>
+
+  <div class="chart-scroll">
+    <div id="monthly-chart" class="monthly-chart">
+    </div>
+  </div>
+
+  <p id="chart-status" class="subtitle">
+    Loading monthly sales data...
+  </p>
+</section>
 
     <section class="panel">
       <h2>Regional Delivery Performance</h2>
@@ -239,6 +304,98 @@
       Static dashboard snapshot based on SQL results.
     </p>
   </footer>
+
+<script>
+async function loadMonthlySales() {
+
+  const chart = document.getElementById("monthly-chart");
+  const status = document.getElementById("chart-status");
+
+  try {
+    // Read the real CSV report from your repository.
+    const response = await fetch(
+      "./results/sql/03_monthly_sales.csv"
+    );
+
+    if (!response.ok) {
+      throw new Error("Could not load the CSV file");
+    }
+
+    const text = await response.text();
+    const rows = text.trim().split(/\r?\n/);
+
+    // Find the columns we need.
+    const headers = rows.shift().split(",");
+    const monthIndex = headers.indexOf("order_month");
+    const salesIndex = headers.indexOf("net_sales_usd");
+
+    if (monthIndex === -1 || salesIndex === -1) {
+      throw new Error("Missing required CSV columns");
+    }
+
+    const data = rows.map(row => {
+      const fields = row.split(",");
+
+      return {
+        month: fields[monthIndex],
+        sales: Number(fields[salesIndex])
+      };
+    });
+
+    // Find the highest value to scale the bars.
+    const maxSales = Math.max(
+      ...data.map(item => item.sales)
+    );
+
+    const monthNames = [
+      "Jan", "Feb", "Mar", "Apr",
+      "May", "Jun", "Jul", "Aug",
+      "Sep", "Oct", "Nov", "Dec"
+    ];
+
+    // Create one bar for each month.
+    data.forEach(item => {
+
+      const column = document.createElement("div");
+      column.className = "month-column";
+
+      const value = document.createElement("span");
+      value.className = "month-value";
+      value.textContent = "$" + Math.round(item.sales);
+
+      const bar = document.createElement("div");
+      bar.className = "month-bar";
+      bar.style.height =
+        (item.sales / maxSales * 170) + "px";
+
+      const label = document.createElement("span");
+      label.className = "month-label";
+
+      const monthNumber = Number(
+        item.month.split("-")[1]
+      );
+
+      label.textContent = monthNames[monthNumber - 1];
+
+      column.appendChild(value);
+      column.appendChild(bar);
+      column.appendChild(label);
+
+      chart.appendChild(column);
+    });
+
+    status.textContent =
+      "Source: SQL monthly sales report | Synthetic data";
+
+  } catch (error) {
+    status.textContent =
+      "Could not load monthly sales data.";
+    console.error(error);
+  }
+}
+
+loadMonthlySales();
+</script>
 
 </body>
 </html>
