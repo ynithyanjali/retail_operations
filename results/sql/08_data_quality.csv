@@ -1,0 +1,7 @@
+quality_check,problem_count
+Orders missing customer,0
+Orders missing product,0
+Returns missing order,0
+Duplicate returns per order,0
+Invalid quantities or discounts,0
+Missing delivery dates,0

@@ -1,0 +1,4 @@
+discount_band,orders,net_sales_usd,estimated_contribution_usd,return_rate_pct
+0%,567,32637.0,13686.63,10.05
+1-10%,418,19913.01,5984.84,10.77
+11%+,215,7734.55,737.35,9.3

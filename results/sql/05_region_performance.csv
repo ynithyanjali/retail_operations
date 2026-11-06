@@ -1,0 +1,5 @@
+region,orders,purchasing_customers,net_sales_usd,return_rate_pct,on_time_delivery_pct
+Midwest,339,51,17091.37,9.44,88.5
+West,337,47,16641.49,10.68,56.38
+South,300,46,14813.16,10.67,75.33
+Northeast,224,35,11738.54,9.82,81.25
